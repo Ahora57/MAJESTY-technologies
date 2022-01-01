@@ -458,7 +458,7 @@ return MurmurHash2A(status, 10, 10) != MurmurHash2A(STATUS_DEBUGGER_INACTIVE, 10
 						*(BYTE*)(KdpLowWriteContentpattern - i + 2) == 0x0D
 						)
 					{
-						KdpLowWriteContentpattern -= i;
+						KdpLowWriteContentpattern -= (80 - i);
 						auto KdpBreakpointTableFix = (uint64_t)Util::ResolveRelativeAddress((PVOID)KdpLowWriteContentpattern, 3, 7);
 
 						for (size_t j = 0; j <= 3 * 0x28; j++) // size struct 0x28 and we check 3 breakpoint 
