@@ -40,7 +40,7 @@ namespace Offset
 		}
 
 
-		else if (lpVersionInformation.dwBuildNumber >= WINDOWS_10_VERSION_THRESHOLD1 && lpVersionInformation.dwBuildNumber <= WINDOWS_10_VERSION_21H1)
+		else if (lpVersionInformation.dwBuildNumber >= WINDOWS_10_VERSION_THRESHOLD1 && lpVersionInformation.dwBuildNumber <= WINDOWS_10_VERSION_21H2)
 		{
 			return WINDOWS_NUMBER_10;
 
