@@ -449,7 +449,7 @@ return MurmurHash2A(status, 10, 10) != MurmurHash2A(STATUS_DEBUGGER_INACTIVE, 10
 			auto KdpLowWriteContentpattern = (uint64_t)Util::FindPatternImage((PVOID)gl_baseNtoskrnl, xorstr_("PAGEKD"), xorstr_("\xF6\xC1\x02\x74\x00\x83\xE1\xFD"), xorstr_("xxxx?xxx"));
 			if (KdpLowWriteContentpattern)
 			{
-				for (size_t i = 80; i > 0 || !((*(BYTE*)(KdpLowWriteContentpattern - i) == 0x40 && (*(BYTE*)(KdpLowWriteContentpattern - i + 1) == 53))); --i)
+				for (size_t i = 0; i < 90 || !((*(BYTE*)(KdpLowWriteContentpattern - i) == 0x40 && (*(BYTE*)(KdpLowWriteContentpattern - i + 1) == 0x53))); i++)
 				{
 
 					if (
@@ -458,9 +458,9 @@ return MurmurHash2A(status, 10, 10) != MurmurHash2A(STATUS_DEBUGGER_INACTIVE, 10
 						*(BYTE*)(KdpLowWriteContentpattern - i + 2) == 0x0D
 						)
 					{
-						KdpLowWriteContentpattern -= (80 - i);
+						KdpLowWriteContentpattern -= i;
 						auto KdpBreakpointTableFix = (uint64_t)Util::ResolveRelativeAddress((PVOID)KdpLowWriteContentpattern, 3, 7);
-
+					
 						for (size_t j = 0; j <= 3 * 0x28; j++) // size struct 0x28 and we check 3 breakpoint 
 						{
 							if (*(BYTE*)(KdpBreakpointTableFix + j) !=0)
