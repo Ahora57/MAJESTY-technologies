@@ -23,11 +23,11 @@ namespace PplibEx
 			uint8_t* pPPL = pEProcess + Offset::ppOffset.protection;
 
 			uint64_t  version = Offset::GetWindowsNumber();
-			if (MurmurHash2A(	version,7,7) == MurmurHash2A(WINDOWS_NUMBER_7,7,7))
+			if (MurmurHash2A(version,7,7) == MurmurHash2A(WINDOWS_NUMBER_7,7,7))
 				*(DWORD*)pPPL |= 1 << 0xB;
-			else if (version == WINDOWS_NUMBER_8)
+			else if (MurmurHash2A(version,8,8) == MurmurHash2A(WINDOWS_NUMBER_8,8,8))
 				*pPPL = true;
-			else if (MurmurHash2A(version,10,10) == MurmurHash2A(WINDOWS_NUMBER_8,10,10))
+			else if (MurmurHash2A(version,10,10) == MurmurHash2A(WINDOWS_NUMBER_8_1,10,10))
 			{ 
 				PS_PROTECTION protection;
 				protection.Flags.Signer = PsProtectedSignerWinSystem;// = PsProtectedSignerMax for Windows 8.1
