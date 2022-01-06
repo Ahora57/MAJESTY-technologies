@@ -38,4 +38,10 @@ Check instrumentation callbacks(under VMware) ->
 Set protect process ->  
 ![alt text](https://github.com/LazyAhora/MAJESTY-technologies/blob/main/Protect%20Process.png)  
 Running under HyperHide  ->  
-![alt text](https://github.com/LazyAhora/MAJESTY-technologies/blob/main/Under%20HyperHide.png) 
+![alt text](https://github.com/LazyAhora/MAJESTY-technologies/blob/main/Under%20HyperHide.png)  
+Set ValidAccessMask to 0  ->  
+![alt text](https://github.com/LazyAhora/MAJESTY-technologies/blob/main/Dead%20ValidAccessMask.png)  
+Set DbgkpProcessDebugPortMutex to 0 ->  
+![alt text](https://github.com/LazyAhora/MAJESTY-technologies/blob/main/Dead%20DbgkpProcessDebugPortMutex.png)  
+Try open R/W handle to protected process ->  
+![alt text](https://github.com/LazyAhora/MAJESTY-technologies/blob/main/Open%20handle%20to%20protected%20process.png)  
