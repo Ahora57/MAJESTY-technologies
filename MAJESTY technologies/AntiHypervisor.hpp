@@ -10,12 +10,14 @@
 namespace DetectHyp
 {
 	__forceinline	bool ProcIsIntel()
-		{
-			int cpuid[4]{ -1 }; 
-			__cpuid(cpuid, 0);
-				if (MurmurHash2A(cpuid[2],4,4) == MurmurHash2A('letn',4,4))
-				{	return true;		}
-		return false;
+	{
+		int cpuid[4]{ -1 }; 
+		__cpuid(cpuid, 0);
+		if (MurmurHash2A(cpuid[2],4,4) == MurmurHash2A('letn',4,4))
+	           {	
+                      return true;		
+                   }
+		    return false;
 	}	
 
 	__forceinline	bool compare_list_cpuid()
