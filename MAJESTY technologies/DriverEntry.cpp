@@ -22,7 +22,7 @@
 /*
 For manual map driver just  give base address ntoskrnl in parameters  (like kdmapper)	https://github.com/TheCruZ/kdmapper/blob/c3b404298bf90b8fb2e74c2be783569dd0eaa06e/kdmapper/main.cpp#L105
 
-
+Like :  https://cdn.discordapp.com/attachments/928741833117409421/928741933562601503/Set_parameter.png
 
 
 
