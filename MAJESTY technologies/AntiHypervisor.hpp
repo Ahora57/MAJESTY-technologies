@@ -99,9 +99,9 @@ namespace DetectHyp
 		int data[4]{ -1 }; 
 		for (size_t i = 0; i < 30; i++)
 		{
-			auto  tick1 = __readmsr(IA32_APERF_MSR) << 32;
+			auto  tick1 = __readmsr(IA32_APERF_MSR);
 			__cpuid(data, 0); //call vm-exit
-			auto tick2 = __readmsr(IA32_APERF_MSR) << 32;
+			auto tick2 = __readmsr(IA32_APERF_MSR);
 			if (!tick1 && !tick2)
 			{ 
 				return true;
@@ -109,7 +109,7 @@ namespace DetectHyp
 			avg += (tick2 - tick1);
 		}
 		avg /= 30;
-		return   (avg < 0x00000BE30000) || (avg > 0x00000FFF0000000);
+		return   (avg < 0x2ff) || (avg > 0x33);
 	}
 
 	__forceinline bool lbr_is_virtulazed()
