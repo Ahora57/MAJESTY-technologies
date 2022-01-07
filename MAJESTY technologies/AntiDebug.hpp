@@ -331,10 +331,10 @@ namespace AntiDebug
 				0,
 				0,
 				0,
-0
-);
+				0
+				);
 
-return MurmurHash2A(status, 10, 10) != MurmurHash2A(STATUS_DEBUGGER_INACTIVE, 10, 10);
+				return MurmurHash2A(status, 10, 10) != MurmurHash2A(STATUS_DEBUGGER_INACTIVE, 10, 10);
 		}
 
 		//Call KdChangeOption like Vanguard  -> https://www.unknowncheats.me/forum/2798056-post2.html
