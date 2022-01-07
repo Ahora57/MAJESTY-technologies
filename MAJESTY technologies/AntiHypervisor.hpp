@@ -111,7 +111,7 @@ namespace DetectHyp
 			avg += (tick2 - tick1);
 		}
 		avg /= 30;
-		return   (avg < 0x2ff) || (avg > 0x33);
+		return  (0x2ff < avg) || (0x33 > avg);
 	}
 
 	__forceinline bool lbr_is_virtulazed()
