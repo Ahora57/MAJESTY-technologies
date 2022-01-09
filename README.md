@@ -3,8 +3,10 @@ Little driver for protecthion.
 The driver is still under development, so you can submit your ideas!  
 I write it's for manual map driver,because i havn't sertivicate for driver.  
 
-Version 1.2
+Version 1.3
 
+Support windows 10-11!!  
+You can remove/fix some detect with signature for work on windows 7,7sp1,8,8.1!  
 
 I try do this driver use max DKOM   
  
