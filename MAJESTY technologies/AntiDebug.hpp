@@ -494,7 +494,7 @@ namespace AntiDebug
 						KdpTimeSlipDpcRoutinePattern += i;
 						auto KdpTimeSlipWorkItemFix = (uint64_t)Util::ResolveRelativeAddress((PVOID)KdpTimeSlipDpcRoutinePattern, 3, 7);
 
-						for (size_t j = 0; j < 0x20; j++) //size(WORK_QUEUE_ITEM) = 0x20 
+						for (size_t j = 0; j <= 0x20; j++) //size(WORK_QUEUE_ITEM) = 0x20 
 						{
 							if (*(BYTE*)(KdpTimeSlipWorkItemFix+ j))
 							{
