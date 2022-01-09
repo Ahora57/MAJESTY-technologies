@@ -65,7 +65,7 @@ typedef  NTSTATUS(NTAPI* t_PsLookupThreadByThreadId)
 
 
  
-typedef LONG_PTR(NTAPI* t_ObfReferenceObject)
+typedef LONG_PTR(NTAPI* t_ObfDereferenceObject )
 (
     PVOID Object
     );
