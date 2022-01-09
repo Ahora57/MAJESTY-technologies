@@ -78,7 +78,7 @@ namespace AntiDebug
 
 			auto PsLookupThreadByThreadId = (t_PsLookupThreadByThreadId)Util::GetProcAddress(gl_baseNtoskrnl, xorstr_("PsLookupThreadByThreadId"));
 
-			auto ObfReferenceObject= (t_ObfReferenceObject)Util::GetProcAddress(gl_baseNtoskrnl, xorstr_("ObfReferenceObject"));
+			auto ObfDereferenceObject= (t_ObfReferenceObject)Util::GetProcAddress(gl_baseNtoskrnl, xorstr_("ObfDereferenceObject"));
 
 			for (size_t i = 0; i < 35000; i++)
 			{
@@ -104,7 +104,7 @@ namespace AntiDebug
 							}
 						}
 					}
-					ObfReferenceObject(Thread);
+					ObfDereferenceObject(Thread);
 				}
 
 			}
@@ -124,7 +124,7 @@ namespace AntiDebug
 			auto PsLookupThreadByThreadId = (t_PsLookupThreadByThreadId)Util::GetProcAddress(gl_baseNtoskrnl, xorstr_("PsLookupThreadByThreadId"));
 
 			auto PsGetContextThread = (t_PsGetContextThread)Util::GetProcAddress(gl_baseNtoskrnl, xorstr_("PsGetContextThread"));
-			auto ObfReferenceObject = (t_ObfReferenceObject)Util::GetProcAddress(gl_baseNtoskrnl, xorstr_("ObfReferenceObject"));
+			auto ObfDereferenceObject = (t_ObfReferenceObject)Util::GetProcAddress(gl_baseNtoskrnl, xorstr_("ObfDereferenceObject"));
 
 			for (size_t i = 0; i < 35000; i++)
 			{
@@ -153,7 +153,7 @@ namespace AntiDebug
 							} 
 						}
 					}
-					ObfReferenceObject(Thread);
+					ObfDereferenceObject(Thread);
 				}
 
 			}
