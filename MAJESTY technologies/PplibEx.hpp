@@ -23,11 +23,11 @@ namespace PplibEx
 			uint8_t* pPPL = pEProcess + Offset::ppOffset.protection;
 
 			uint64_t  version = Offset::GetWindowsNumber();
-			if (MurmurHash2A(version,7,7) == MurmurHash2A(WINDOWS_NUMBER_7,7,7))
+			if (MurmurHash2A(	version,7,7) == MurmurHash2A(WINDOWS_NUMBER_7,7,7))
 				*(DWORD*)pPPL |= 1 << 0xB;
 			else if (MurmurHash2A(version,8,8) == MurmurHash2A(WINDOWS_NUMBER_8,8,8))
 				*pPPL = true;
-			else if (MurmurHash2A(version,10,10) == MurmurHash2A(WINDOWS_NUMBER_8_1,10,10))
+			else if (MurmurHash2A(version,9,9) == MurmurHash2A(WINDOWS_NUMBER_8_1,9,9))
 			{ 
 				PS_PROTECTION protection;
 				protection.Flags.Signer = PsProtectedSignerWinSystem;// = PsProtectedSignerMax for Windows 8.1
@@ -36,7 +36,7 @@ namespace PplibEx
 			}
 
 			// process hacker can't sea PsProtectedTypeMax  and write Unknown	? WTF?!
-			else if (MurmurHash2A(version,4,4) == MurmurHash2A(WINDOWS_NUMBER_10,4,4) || MurmurHash2A(version,8,8) == MurmurHash2A(WINDOWS_NUMBER_11,8,8))
+			else if (MurmurHash2A(version,10,10) == MurmurHash2A(WINDOWS_NUMBER_10,10,10) || MurmurHash2A(version,11, 11) == MurmurHash2A(WINDOWS_NUMBER_11, 11, 11))
 			{
 				PS_PROTECTION protection; 
 				protection.Flags.Signer = PsProtectedSignerMax;

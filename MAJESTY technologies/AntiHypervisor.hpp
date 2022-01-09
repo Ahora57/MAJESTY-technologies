@@ -9,16 +9,16 @@
 
 namespace DetectHyp
 {
-	__forceinline	bool ProcIsIntel()
-	{
-		int cpuid[4]{ -1 }; 
-		__cpuid(cpuid, 0);
-		if (MurmurHash2A(cpuid[2],4,4) == MurmurHash2A('letn',4,4))
-	           {	
-                      return true;		
-                   }
-		    return false;
-	}	
+		__forceinline	bool ProcIsIntel()
+		{
+			int cpuid[4]{ -1 }; 
+			__cpuid(cpuid, 0);
+				if (MurmurHash2A(cpuid[2],4,4) == MurmurHash2A('letn',4,4))
+				{	
+					return true;		
+				}
+			return false;
+		}	
 
 	__forceinline	bool compare_list_cpuid()
 	{
@@ -50,8 +50,8 @@ namespace DetectHyp
 
 
 
-	bool   time_attack_rdtsc()
-	{ 
+		bool   time_attack_rdtsc()
+		{ 
 		uint64_t avg = 0;
 		int cpuInfo[4] = {}; 
 		for (int i = 0; i < 2500; i++)
@@ -63,7 +63,7 @@ namespace DetectHyp
 		} 
 		avg /= 2500;
 		return (avg < 500 && avg > 25) ? false : true;
-	}
+		}
 
 
 

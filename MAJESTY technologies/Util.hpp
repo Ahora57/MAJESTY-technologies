@@ -14,27 +14,7 @@ namespace Util
 	 
 
 
-	__forceinline  ULONG KeMessageBox(PCWSTR title, PCWSTR text, ULONG_PTR type)
-	{
-
-
-		UNICODE_STRING u_title = ApiWrapper::InitUnicodeString(title);
-		UNICODE_STRING u_text = ApiWrapper::InitUnicodeString(text);
-
-		ULONG_PTR args[] = { (ULONG_PTR)&u_text, (ULONG_PTR)&u_title, type };
-		ULONG response = 0;
-
-
-
-		ExRaiseHardError(STATUS_SERVICE_NOTIFICATION, 3, 3, args, 1, &response);
-
-
-		ApiWrapper::FreeUnicodeString(u_title);
-		ApiWrapper::FreeUnicodeString(u_text);
-
-		return response;
-	}
-
+	
 	
 	__forceinline  uint64_t	GetProcAddress(const uintptr_t imageBase, const char* exportName) {
 
@@ -64,56 +44,7 @@ namespace Util
 		return 0;
 	}
 
-	__forceinline DWORD64 GetKernelBasebyDisk(const wchar_t* name)
-	{
-
-
-		PDRIVER_OBJECT DiskDriver = NULL;
-
-		UNICODE_STRING  DriverName = ApiWrapper::InitUnicodeString(xorstr_(L"\\Driver\\disk"));
-
-
-
-		auto status = ObReferenceObjectByName(
-			&DriverName,
-			OBJ_CASE_INSENSITIVE,
-			NULL,
-			0,
-			*IoDriverObjectType,
-			KernelMode,
-			NULL,
-			(PVOID*)&DiskDriver);
-
-		ApiWrapper::FreeUnicodeString(DriverName);
-
-		if (NT_SUCCESS(status))
-		{
-
-
-			PLDR_DATA_TABLE_ENTRY entry = (PLDR_DATA_TABLE_ENTRY)DiskDriver->DeviceObject->DriverObject->DriverSection;
-			PLDR_DATA_TABLE_ENTRY first = entry;
-			while ((PLDR_DATA_TABLE_ENTRY)entry->InLoadOrderModuleList.Flink != first)
-			{
-
-				if (NoCRT::string::wstricmp(entry->BaseDllName.Buffer, name) == 0)
-				{
-					ObDereferenceObject(DiskDriver);
-					return	(DWORD64)entry->DllBase;
-				}
-				entry = (PLDR_DATA_TABLE_ENTRY)entry->InLoadOrderModuleList.Flink;
-
-
-			}
-			return 0;
-
-		}
-		else
-		{
-			return 0;
-		}
-
-	}
-
+	
 	__forceinline  ULONG Print(const char* text, ...)
 	{
 

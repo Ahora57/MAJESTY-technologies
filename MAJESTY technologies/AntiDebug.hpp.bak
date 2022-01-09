@@ -78,8 +78,7 @@ namespace AntiDebug
 
 			auto PsLookupThreadByThreadId = (t_PsLookupThreadByThreadId)Util::GetProcAddress(gl_baseNtoskrnl, xorstr_("PsLookupThreadByThreadId"));
 
-			auto ObfReferenceObject= (t_ObfReferenceObject)Util::GetProcAddress(gl_baseNtoskrnl, xorstr_("ObfReferenceObject"));
-
+			 
 			for (size_t i = 0; i < 35000; i++)
 			{
 
@@ -104,7 +103,7 @@ namespace AntiDebug
 							}
 						}
 					}
-					ObfReferenceObject(Thread);
+
 				}
 
 			}
@@ -124,7 +123,6 @@ namespace AntiDebug
 			auto PsLookupThreadByThreadId = (t_PsLookupThreadByThreadId)Util::GetProcAddress(gl_baseNtoskrnl, xorstr_("PsLookupThreadByThreadId"));
 
 			auto PsGetContextThread = (t_PsGetContextThread)Util::GetProcAddress(gl_baseNtoskrnl, xorstr_("PsGetContextThread"));
-			auto ObfReferenceObject = (t_ObfReferenceObject)Util::GetProcAddress(gl_baseNtoskrnl, xorstr_("ObfReferenceObject"));
 
 			for (size_t i = 0; i < 35000; i++)
 			{
@@ -153,7 +151,7 @@ namespace AntiDebug
 							} 
 						}
 					}
-					ObfReferenceObject(Thread);
+
 				}
 
 			}
@@ -302,8 +300,6 @@ namespace AntiDebug
 			
 		}
 	}
-
-
 	namespace AntiKernelDebug
 	{
 
@@ -335,10 +331,10 @@ namespace AntiDebug
 				0,
 				0,
 				0,
-				0
-				);
+0
+);
 
-		return MurmurHash2A(status, 10, 10) != MurmurHash2A(STATUS_DEBUGGER_INACTIVE, 10, 10);
+return MurmurHash2A(status, 10, 10) != MurmurHash2A(STATUS_DEBUGGER_INACTIVE, 10, 10);
 		}
 
 		//Call KdChangeOption like Vanguard  -> https://www.unknowncheats.me/forum/2798056-post2.html
@@ -356,14 +352,39 @@ namespace AntiDebug
 		//Check Some value ( more info -> https://shhoya.github.io/antikernel_kerneldebugging4.html	)
 		__forceinline	bool CheckGlobalValue()
 		{
-			 
+			/*
+			Need add 
+			KdpDebuggerStructuresInitialized - true under debugg
+			KdPageDebuggerSection - true under debugg
+			KdLocalDebugEnabled - true under debugg
+
+			KdpTimeSlipWorkItem 20 size(WORK_QUEUE_ITEM) check ok
+			Loc debug
+			00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00  ................
+			B0 5F 9B 56 05 F8 FF FF-00 00 00 00 00 00 00 00  ._.V............
+
+			No debugg
+		    00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00  ................
+			00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00  ................
+			00 00 00 00 00 00 00 00-00 00 00 00 00 00 00 00  ................
+
+
+
+			*/
 
 			auto kernelDebuggerPres = *(BYTE*)(0xFFFFF78000000000 + 0x02D4);
 
-			 
+			auto 	KdEnteredDebugger = (PBOOLEAN)Util::GetProcAddress(gl_baseNtoskrnl, xorstr_("KdEnteredDebugger"));
+
+			if (KdEnteredDebugger)
+			{
+				if (*KdEnteredDebugger)
+				{
+					return true;
+				}
+			}
 
 			//	check value in KUSER_SHARED_DATA 
-
 			if ((kernelDebuggerPres & 1) || (kernelDebuggerPres & 2))
 			{
 				return true;
@@ -470,60 +491,7 @@ namespace AntiDebug
 				}
 			}
 			 
-
-			/*
-			7E 11  BA 01 00 00 00  48 8D 0D ? ? ? ? E8 ? ? ? FF
-
-
-			\x7E\x11\xBA\x01\x00\x00\x00\x48\x8D\x0D\x00\x00\x00\x00\xE8\x00\x00\x00\xFF
-
-			xxxxxxxxxx????x???x
-			*/
-			auto KdpTimeSlipDpcRoutinePattern = (uint64_t)Util::FindPatternImage((PVOID)gl_baseNtoskrnl, xorstr_("PAGEKD"), xorstr_("\x7E\x11\xBA\x01\x00\x00\x00\x48\x8D\x0D\x00\x00\x00\x00\xE8\x00\x00\x00\xFF"), xorstr_("xxxxxxxxxx????x???x"));
-			if (KdpTimeSlipDpcRoutinePattern)
-			{
-				for (size_t i = 0; *(BYTE*)(KdpTimeSlipDpcRoutinePattern + i) != 0xc3; i++) //wallking while not 1  ret 
-				{
-
-					if (
-						*(BYTE*)(KdpTimeSlipDpcRoutinePattern + i) == 0x48 &&
-						*(BYTE*)(KdpTimeSlipDpcRoutinePattern + i + 1) == 0x8D &&
-						*(BYTE*)(KdpTimeSlipDpcRoutinePattern + i + 2) == 0x0D
-						)
-					{
-						KdpTimeSlipDpcRoutinePattern += i;
-						auto KdpTimeSlipWorkItemFix = (uint64_t)Util::ResolveRelativeAddress((PVOID)KdpTimeSlipDpcRoutinePattern, 3, 7);
-
-						for (size_t j = 0; j < 0x20; j++) //size(WORK_QUEUE_ITEM) = 0x20 
-						{
-							if (*(BYTE*)(KdpTimeSlipWorkItemFix+ j))
-							{
-								return true;
-							}
-
-						}
-						break;
-
-					}
-				}
-
-			}
-
-			/*
-			? 38 ? ? ? ? ? 75 ? 45 ? ? ? 88 ? ? ? ? ? 48 8D
-			\x00\x38\x00\x00\x00\x00\x00\x75\x00\x45\x00\x00\x00\x88\x00\x00\x00\x00\x00\x48\x8D
-			?x?????x?x???x?????xx
-			*/
-
-			auto KdpDebuggerStructuresInitializedPattern = (uint64_t)Util::FindPatternImage((PVOID)gl_baseNtoskrnl, xorstr_("PAGEKD"), xorstr_("\x00\x38\x00\x00\x00\x00\x00\x75\x00\x45\x00\x00\x00\x88\x00\x00\x00\x00\x00\x48\x8D"), xorstr_("?x?????x?x???x?????xx"));
-			if (KdpDebuggerStructuresInitializedPattern)
-			{
-				auto KdpDebuggerStructuresInitializedFix = (uint64_t)Util::ResolveRelativeAddress((PVOID)KdpDebuggerStructuresInitializedPattern, 3, 7);
-				if (*(bool*)KdpDebuggerStructuresInitializedFix)
-				{
-					return true;
-				}
-			}
+			
 			return false;
 		}
 			
