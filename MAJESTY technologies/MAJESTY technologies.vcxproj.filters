@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Driver Files">
+      <UniqueIdentifier>{8E41214B-6785-4CFE-B992-037D68949A14}</UniqueIdentifier>
+      <Extensions>inf;inv;inx;mof;mc;</Extensions>
+    </Filter>
+    <Filter Include="ApiWrapper">
+      <UniqueIdentifier>{6dcabf7f-b670-4db3-8628-752a8a658631}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Obfuscathion">
+      <UniqueIdentifier>{cb6075d4-17df-4280-8fb7-103222b1c9e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AntiReverse">
+      <UniqueIdentifier>{78b18822-0940-453a-97a3-e3733b35acfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Asm">
+      <UniqueIdentifier>{8e8481b3-a740-4a86-ad82-63ebaaa99a9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Util">
+      <UniqueIdentifier>{8dcc469a-1985-430a-9075-1f7ea06a9b37}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Inf Include="MAJESTYtechnologies.inf">
+      <Filter>Driver Files</Filter>
+    </Inf>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Util.hpp">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="GetPID.h">
+      <Filter>Util</Filter>
+    </ClInclude>
+    <ClInclude Include="ApiWrapper.hpp">
+      <Filter>ApiWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="NoCRT.h">
+      <Filter>ApiWrapper</Filter>
+    </ClInclude>
+    <ClInclude Include="NtApiDef.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AntiHypervisor.hpp">
+      <Filter>AntiReverse</Filter>
+    </ClInclude>
+    <ClInclude Include="Offset.hpp">
+      <Filter>AntiReverse</Filter>
+    </ClInclude>
+    <ClInclude Include="PplibEx.hpp">
+      <Filter>AntiReverse</Filter>
+    </ClInclude>
+    <ClInclude Include="xorstr.h">
+      <Filter>Obfuscathion</Filter>
+    </ClInclude>
+    <ClInclude Include="MurmurHash2A.h">
+      <Filter>Obfuscathion</Filter>
+    </ClInclude>
+    <ClInclude Include="Struct.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="AntiDebug.hpp">
+      <Filter>AntiReverse</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="DriverEntry.cpp">
+      <Filter>Driver Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
