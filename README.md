@@ -36,14 +36,14 @@ To-do list:
 3)Check some hook?  
 
 Check instrumentation callbacks(under VMware) ->  
-![alt text](https://github.com/LazyAhora/MAJESTY-technologies/blob/main/Detect%20instrumentation%20callbacks.png)  
+![alt text](https://github.com/Ahora57/MAJESTY-technologies/blob/main/Detect%20instrumentation%20callbacks.png?raw=true)  
 Set protect process ->  
-![alt text](https://github.com/LazyAhora/MAJESTY-technologies/blob/main/Protect%20Process.png)  
+![alt text](https://github.com/Ahora57/MAJESTY-technologies/blob/main/Protect%20Process.png?raw=true)  
 Running under HyperHide  ->  
-![alt text](https://github.com/LazyAhora/MAJESTY-technologies/blob/main/Under%20HyperHide.png)  
+![alt text](https://github.com/Ahora57/MAJESTY-technologies/blob/main/Under%20HyperHide.png?raw=true)  
 Set ValidAccessMask to 0  ->  
-![alt text](https://github.com/LazyAhora/MAJESTY-technologies/blob/main/Dead%20ValidAccessMask.png)  
+![alt text](https://github.com/Ahora57/MAJESTY-technologies/blob/main/Dead%20ValidAccessMask.png?raw=true)  
 Set DbgkpProcessDebugPortMutex to 0 ->  
-![alt text](https://github.com/LazyAhora/MAJESTY-technologies/blob/main/Dead%20DbgkpProcessDebugPortMutex.png)  
+![alt text](https://github.com/Ahora57/MAJESTY-technologies/blob/main/Dead%20DbgkpProcessDebugPortMutex.png?raw=true)  
 Try open R/W handle to protected process ->  
-![alt text](https://github.com/LazyAhora/MAJESTY-technologies/blob/main/Open%20handle%20to%20protected%20process.png)  
+![alt text](https://github.com/Ahora57/MAJESTY-technologies/blob/main/Open%20handle%20to%20protected%20process.png?raw=true)  
